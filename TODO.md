@@ -11,7 +11,7 @@ Docker
 - [ ] Configure the prod environment with docker - https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
 
 Database
-- [ ] Configure with postgres
+- [x] Configure with postgres
 
 Settings
 - [ ] Configure with different environments
