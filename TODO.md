@@ -23,3 +23,7 @@ AWS
 
 Deployment
 - [ ] Run deployment checklist - https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+- [ ] Configure with CI/CD
+
+Security
+- [x] Add gitignore

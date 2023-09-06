@@ -1,0 +1,42 @@
+# Byte-compiled files
+*.pyc
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+
+# IDE or text editor specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Django development artifacts
+*.log
+db.sqlite3
+media/
+staticfiles/
+*.secret_key
+
+# Dependency directories
+__pycache__/
+node_modules/
+bower_components/
+
+# Ignore pipenv/virtualenv environments
+/.venv/
+pipfile.lock
+/pipfile-*
+
+# Ignore local settings which may contain sensitive information
+local_settings.py
+
+# Ignore macOS-specific files
+.DS_Store
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Env variables
+.env*
