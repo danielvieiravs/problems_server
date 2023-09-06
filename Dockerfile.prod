@@ -1,0 +1,70 @@
+###########
+# BUILDER #
+###########
+
+# pull official base image
+FROM python:3.11.4-slim-buster as builder
+
+# set work directory
+WORKDIR /usr/src/server
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc
+
+# lint
+RUN pip install --upgrade pip
+RUN pip install flake8==6.0.0
+COPY . /usr/src/server/
+RUN flake8 --ignore=E501,F401 .
+
+# install python dependencies
+COPY ./requirements.txt .
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/server/wheels -r requirements.txt
+
+
+#########
+# FINAL #
+#########
+
+# pull official base image
+FROM python:3.11.4-slim-buster
+
+# create directory for the server user
+RUN mkdir -p /home/server
+
+# create the server user
+RUN addgroup --system server && adduser --system --group server
+
+# create the appropriate directories
+ENV SERVER_HOME=/home/server
+RUN mkdir $SERVER_HOME/staticfiles
+WORKDIR $SERVER_HOME
+
+# install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends netcat
+COPY --from=builder /usr/src/server/wheels /wheels
+COPY --from=builder /usr/src/server/requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install --no-cache /wheels/*
+
+# copy entrypoint.prod.sh
+COPY ./entrypoint.prod.sh .
+RUN sed -i 's/\r$//g'  $SERVER_HOME/entrypoint.prod.sh
+RUN chmod +x  $SERVER_HOME/entrypoint.prod.sh
+
+# copy project
+COPY . $SERVER_HOME
+
+# chown all the files to the server user
+RUN chown -R server:server $SERVER_HOME
+
+# change to the server user
+USER server
+
+# run entrypoint.prod.sh
+ENTRYPOINT ["/home/server/entrypoint.prod.sh"]

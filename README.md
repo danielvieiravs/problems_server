@@ -1,4 +1,4 @@
-#### How to add new package
+## How to add new package
 
 > Remember to add new package without specifying the version in the `.in` file. Package version is pinned automatically in the automatically generated `txt` file.
 
@@ -17,7 +17,7 @@ If this is package used only for development, add it to the `requirements_dev.in
 pip-compile --output-file requirements_dev.txt requirements_dev.in
 ```
 
-#### How to upgrade package
+## How to upgrade package
 
 To upgrade package from production requirements run:
 
@@ -34,7 +34,7 @@ To upgrade the package from development requirements, run:
 pip-compile --upgrade-package <package_name> --output-file requirements_dev.txt requirements_dev.in
 ```
 
-#### How to install / sync the packages
+## How to install / sync the packages
 
 [`pip-sync`](https://github.com/jazzband/pip-tools#example-usage-for-pip-sync) is used in this case.
 
@@ -50,7 +50,9 @@ For development setup, run:
 pip-sync requirements_dev.txt
 ```
 
-### Run Project with Docker
+## Docker
+
+### Dev
 
 #### Build the image and run container
 
@@ -58,7 +60,27 @@ pip-sync requirements_dev.txt
 docker-compose up -d --build
 ```
 
-#### Access the container
+### Prod
+
+#### Build the image and run container
+
+```shell
+docker-compose -f docker-compose.prod.yml up -d --build
+```
+
+#### Migrate
+
+```shell
+docker-compose -f docker-compose.prod.yml exec fintech_server_api_1 python manage.py migrate --noinput
+```
+
+#### Collect static
+
+```shell
+docker-compose -f docker-compose.prod.yml exec fintech_server_api_1 python manage.py collectstatic --no-input --clear
+```
+
+### Access the container
 
 ```shell
 docker exec -i -t fintech_server_api_1 /bin/bash

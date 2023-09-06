@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y netcat
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
+COPY ./requirements_dev.txt .
+RUN pip install -r requirements_dev.txt
 
 # copy entrypoint.sh
 COPY ./entrypoint.sh .
