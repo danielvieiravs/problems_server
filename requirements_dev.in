@@ -5,3 +5,4 @@ pip-tools
 pylint
 pre-commit
 coverage
+pylint-django

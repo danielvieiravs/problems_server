@@ -51,7 +51,14 @@ pre-commit==3.4.0
 psycopg2-binary==2.9.7
     # via -r requirements.in
 pylint==2.17.5
+    # via
+    #   -r requirements_dev.in
+    #   pylint-django
+    #   pylint-plugin-utils
+pylint-django==2.5.3
     # via -r requirements_dev.in
+pylint-plugin-utils==0.8.2
+    # via pylint-django
 pyproject-hooks==1.0.0
     # via build
 pyyaml==6.0.1

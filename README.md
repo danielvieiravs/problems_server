@@ -71,17 +71,25 @@ docker-compose -f docker-compose.prod.yml up -d --build
 #### Migrate
 
 ```shell
-docker-compose -f docker-compose.prod.yml exec fintech_server_api_1 python manage.py migrate --noinput
+docker-compose -f docker-compose.prod.yml exec problems_server_api_1 python manage.py migrate --noinput
 ```
 
 #### Collect static
 
 ```shell
-docker-compose -f docker-compose.prod.yml exec fintech_server_api_1 python manage.py collectstatic --no-input --clear
+docker-compose -f docker-compose.prod.yml exec problems_server_api_1 python manage.py collectstatic --no-input --clear
 ```
 
 ### Access the container
 
 ```shell
-docker exec -i -t fintech_server_api_1 /bin/bash
+docker exec -i -t problems_server_api_1 /bin/bash
+```
+
+## Pre-Commit
+
+### Install
+
+```shell
+pre-commit install
 ```

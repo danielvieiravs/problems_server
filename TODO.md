@@ -1,10 +1,10 @@
 Tools
-- [ ] Add pre-commit
-- [ ] Add pylint
+- [ ] Add pre-commit - https://builtwithdjango.com/blog/improve-your-code-with-pre-commit
 
 API
 - [ ] Add API documentation
 - [ ] Add Authentication
+- [ ] Add Rest Framework
 
 Docker
 - [x] Configure the dev environment with docker - https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
